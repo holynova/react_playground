@@ -1,0 +1,20 @@
+.LongList .list-wrapper{
+    height:  600px;
+    width: 100%;
+    border: 1px solid #333;
+    overflow: auto;
+}
+
+.LongList .list-item{
+  height: 40px; 
+  border-bottom: 1px solid pink;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.LongList .list-item > span{ 
+margin-right: 20px;
+
+  
+}
+
