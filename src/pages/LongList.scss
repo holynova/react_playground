@@ -3,5 +3,36 @@
     height:  600px;
     width: 100%;
     border: 1px solid #333;
+    overflow: scroll;
+  }
+  
+  .view-part{
+    height: 600px;
+    width: 100%;
+    border:1px solid red;
+    margin-top:0;
+    // z-index: 100;
+    // position: relative;
+  }
+  .list-item{
+    height: 40px; 
+    border-bottom: 1px solid pink;
+    
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+
+    // &:nth-of-type(2n) {
+    //   background: lightgreen;
+    // }
+    & > span{ 
+      margin-right: 20px; 
+    }
+  }
+
+  .blank-part{
+    background-color: pink;
+    // opacity: 0.5;
+    // z-index: 100;
   }
 }

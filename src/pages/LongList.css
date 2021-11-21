@@ -2,7 +2,7 @@
     height:  600px;
     width: 100%;
     border: 1px solid #333;
-    overflow: auto;
+    overflow: scroll;
 }
 
 .LongList .list-item{
@@ -13,8 +13,10 @@
   align-items: center;
 }
 .LongList .list-item > span{ 
-margin-right: 20px;
+margin-right: 20px; 
+}
 
-  
+.LongList .blank-part {
+  background-color: pink;
 }
 
