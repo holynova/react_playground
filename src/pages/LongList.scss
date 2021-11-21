@@ -1,38 +1,50 @@
 .LongList {
-  .list-wrapper{
-    height:  600px;
-    width: 100%;
-    border: 1px solid #333;
-    overflow: scroll;
-  }
-  
-  .view-part{
-    height: 600px;
-    width: 100%;
-    border:1px solid red;
-    margin-top:0;
-    // z-index: 100;
-    // position: relative;
-  }
-  .list-item{
-    height: 40px; 
-    border-bottom: 1px solid pink;
+  .component{
+    position: relative;
     
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-
-    // &:nth-of-type(2n) {
-    //   background: lightgreen;
-    // }
-    & > span{ 
-      margin-right: 20px; 
+    border: 1px solid red;
+    height: 600px;
+    
+    .list-wrapper{
+      height:  600px;
+      width: 100%;
+      border: 1px solid #333;
+      overflow: scroll;
+      position: absolute;
+      left:0;
+      top:0;
+      .blank-part{
+      // background-color: pink;
+      // opacity: 0.5;
+      // z-index: 100;
+      }
     }
-  }
+    
+    .view-part{
+      height: 600px;
+      width: 100%;
+      border:1px solid green;
+      margin-top:0;
+      
+      // z-index: 100;
+      position: absolute;
+      left:0;
+      top:0;
+      .list-item{
+        height: 40px; 
+        border-bottom: 1px solid pink;
+        
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
 
-  .blank-part{
-    background-color: pink;
-    // opacity: 0.5;
-    // z-index: 100;
+        // &:nth-of-type(2n) {
+        //   background: lightgreen;
+        // }
+        & > span{ 
+          margin-right: 20px; 
+        }
+      }
+    }
   }
 }

@@ -1,22 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./LongList.scss";
 import { Button } from "antd";
-import { log } from "../common/debug";
+import { log } from "../common/utils/debug";
+import { throttle } from "../common/utils/throttle";
+import { getList, fetchList } from "./utils";
 
 const total = 2e2;
 const itemHeight = 40;
 const wrapperHeight = 600;
 const pageSize = Math.ceil(wrapperHeight / itemHeight);
-
-const getList = (offset = 0, limit = 10) => {
-  let maxStartIndex = total - limit;
-  if (offset > maxStartIndex) {
-    offset = maxStartIndex;
-  }
-  return new Array(limit).fill(0).map((_, index) => {
-    return { id: index + offset, value: Math.random() };
-  });
-};
 
 function LongList() {
   const [list, setList] = useState(
@@ -32,26 +24,29 @@ function LongList() {
       if (blankRef.current) {
         blankRef.current.style.height = total * itemHeight + "px";
       }
-      if (viewRef.current) {
-        viewRef.current.style.marginTop = `${-total * itemHeight + 0}px`;
-      }
+      // if (viewRef.current) {
+      //   viewRef.current.style.marginTop = `${-total * itemHeight + 0}px`;
+      // }
     }
 
     function onScroll() {
       let scrollTop = wrapperRef.current.scrollTop;
       let newOffset = Math.floor(scrollTop / itemHeight);
       setOffset(newOffset);
-      let noMore = newOffset > total - pageSize;
-      if (!noMore) {
-        viewRef.current.style.marginTop = `${
-          -total * itemHeight + scrollTop
-        }px`;
-      }
+
+      // let noMore = newOffset > total - pageSize;
+      // if (!noMore) {
+      //   viewRef.current.style.marginTop = `${
+      //     -total * itemHeight + scrollTop
+      //   }px`;
+      // }
       console.log("scroll", `top=${scrollTop},offset=${newOffset}`);
     }
+
+    const throttleOnScroll = throttle(onScroll, 100);
     function initEvent() {
       if (wrapperRef.current) {
-        wrapperRef.current.addEventListener("scroll", onScroll);
+        wrapperRef.current.addEventListener("scroll", throttleOnScroll);
       }
     }
 
@@ -59,7 +54,7 @@ function LongList() {
     initEvent();
     return () => {
       if (wrapperRef.current) {
-        wrapperRef.current.removeEventListener("scroll", onScroll);
+        wrapperRef.current.removeEventListener("scroll", throttleOnScroll);
       }
     };
   }, []);
@@ -105,10 +100,12 @@ function LongList() {
     <div className="LongList">
       <h1>LongList</h1>
       <h3>offset={offset}</h3>
-      <div className="list-wrapper" ref={wrapperRef}>
-        <div className="blank-part" ref={blankRef}></div>
+      <div className="component">
         <div className="view-part" ref={viewRef}>
           {viewListPart}
+        </div>
+        <div className="list-wrapper" ref={wrapperRef}>
+          <div className="blank-part" ref={blankRef}></div>
         </div>
       </div>
       {/* <Button>click</Button> */}
