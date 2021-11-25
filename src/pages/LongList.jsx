@@ -8,6 +8,7 @@ import { getList, fetchList } from "./utils";
 const total = 2e2;
 const itemHeight = 40;
 const wrapperHeight = 600;
+
 const pageSize = Math.ceil(wrapperHeight / itemHeight);
 
 function LongList() {
